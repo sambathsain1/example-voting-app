@@ -4,7 +4,7 @@ import io.qameta.allure.Description;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SampleTest {
+class SampleTest {
 
     @Test
     @Description("Verify basic functionality")
