@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class AttachSonarReportTest {
 
     private static final String SONAR_URL = "http://172.30.117.227:9000"; // your SonarQube base URL
-    private static final String PROJECT_KEY = "worker";              // your SonarQube project key
+    private static final String PROJECT_KEY = "voting-app";              // your SonarQube project key
     private static final String SONAR_TOKEN = System.getenv("SONAR_TOKEN"); // Jenkins will inject this token
 
     @Test
