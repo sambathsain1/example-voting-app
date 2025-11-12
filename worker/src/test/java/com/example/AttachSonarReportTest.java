@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class SonarQubeReportTest {
+class AttachSonarReportTest {
 
     private static final String SONAR_URL = "http://172.30.117.227:9000"; // your SonarQube base URL
     private static final String PROJECT_KEY = "voting-app";              // your SonarQube project key
