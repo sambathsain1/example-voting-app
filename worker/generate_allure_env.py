@@ -33,7 +33,7 @@ with open('/var/lib/jenkins/workspace/Allure_TestReport/worker/allure-results/en
         # Create clickable HTML link if mapping exists
         env_file.write(f"SonarQube_Dashboard={sonar_dashboard_url}\n")
         if metric in url_map:
-        link = f"{url_map[metric]}"
+            link = f"{url_map[metric]}"
         #    html_link = f"<a href='{link}' target='_blank'>{value}</a>"
             env_file.write(f"{metric}={value} → {link}\n")
         else:
