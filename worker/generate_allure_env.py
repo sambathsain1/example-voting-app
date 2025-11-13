@@ -11,9 +11,9 @@ project_key = "voting-app"
 sonar_env = os.getenv("SONARQUBE_ENV", "SonarQube")
 
 if sonar_host_url:
-    sonar_dashboard_url = f"{sonar_host_url}/dashboard?id={project_key}"
+    sonar_dashboard_url = f"{sonar_host_url}/dashboard?id={project_key}&codeScope=overall"
 else:
-    sonar_dashboard_url = f"https://172.30.117.227:9000/dashboard?id={project_key}"
+    sonar_dashboard_url = f"https://172.30.117.227:9000/dashboard?id={project_key}&codeScope=overall"
 
 with open('/var/lib/jenkins/workspace/Allure_TestReport/worker/allure-results/environment.properties', 'w') as env_file:
     env_file.write(f"SonarQube_Dashboard={sonar_dashboard_url}\n")
