@@ -19,6 +19,5 @@ with open('/var/lib/jenkins/workspace/Allure_TestReport/worker/allure-results/en
     for measure in measures:
         # Format key=value for the properties file
         env_file.write(f"{measure['metric']}={measure['value']}\n")
-        env_file.write(f"SonarQube Instance={sonar_env}\n")
-        env_file.write(f"SonarQube Dashboard={sonar_dashboard_url}\n")
+        env_file.write(f"SonarQube_Dashboard={sonar_dashboard_url}\n")
         
