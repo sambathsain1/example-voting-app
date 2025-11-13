@@ -5,6 +5,7 @@ with open('/var/lib/jenkins/workspace/Allure_TestReport/worker/allure-results/so
     data = json.load(f)
 
 measures = data['component']['measures']
+metric_map = {m['metric']: m['value'] for m in measures}
 
 sonar_host_url = os.getenv("SONAR_HOST_URL", "").rstrip("/")
 project_key = "voting-app"
@@ -15,10 +16,31 @@ if sonar_host_url:
 else:
     sonar_dashboard_url = f"https://172.30.117.227:9000/dashboard?id={project_key}&codeScope=overall"
 
+url_map = {
+    "bugs": f"{sonar_host_url}/project/issues?id={project_key}&types=BUG",
+    "vulnerabilities": f"{sonar_host_url}/project/issues?id={project_key}&types=VULNERABILITY",
+    "code_smells": f"{sonar_host_url}/project/issues?id={project_key}&types=CODE_SMELL",
+    "coverage": f"{sonar_host_url}/component_measures?id={project_key}&metric=coverage",
+    "duplicated_lines_density": f"{sonar_host_url}/component_measures?id={project_key}&metric=duplicated_lines_density"
+}
+
 with open('/var/lib/jenkins/workspace/Allure_TestReport/worker/allure-results/environment.properties', 'w') as env_file:
-    env_file.write(f"SonarQube_Dashboard={sonar_dashboard_url}\n")
+
     for measure in measures:
-        # Format key=value for the properties file
-        env_file.write(f"{measure['metric']}={measure['value']}\n")
+        metric = measure.get('metric')
+        value = measure.get('value', 'N/A')
+
+        # Create clickable HTML link if mapping exists
+        if metric in url_map:
+            link = f"{url_map[metric]}"
+            html_link = f"<a href='{link}' target='_blank'>{value}</a>"
+            env_file.write(f"{metric}={html_link}\n")
+        else:
+            env_file.write(f"{metric}={value}\n")
+   # env_file.write(f"SonarQube_Dashboard={sonar_dashboard_url}\n")
+  #  env_file.write(f"Bugs={bug_count} → {bugs_url}\n")
+  #  env_file.write(f"Vulnerabilities={vuln_count} → {vuln_url}\n")
+   # env_file.write(f"Code Smells={smell_count} → {code_smells_url}\n")
+    
     
         
