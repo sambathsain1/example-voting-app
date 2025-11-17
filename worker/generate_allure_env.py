@@ -1,7 +1,7 @@
 import json
 import os  
 
-with open('/var/lib/jenkins/workspace/Allure_TestReport/worker/allure-results/sonarqube-metrics.json', 'r') as f:
+with open('worker/allure-results/sonarqube-metrics.json', 'r') as f:
     data = json.load(f)
 
 measures = data['component']['measures']
@@ -24,14 +24,14 @@ url_map = {
     "duplicated_lines_density": f"{sonar_host_url}/component_measures?id={project_key}&metric=duplicated_lines_density"
 }
 
-with open('/var/lib/jenkins/workspace/Allure_TestReport/worker/allure-results/environment.properties', 'w') as env_file:
+with open('worker/allure-results/environment.properties', 'w') as env_file:
 
+    env_file.write(f"SonarQube_Dashboard={sonar_dashboard_url}\n")
     for measure in measures:
         metric = measure.get('metric')
         value = measure.get('value', 'N/A')
 
         # Create clickable HTML link if mapping exists
-        env_file.write(f"SonarQube_Dashboard={sonar_dashboard_url}\n")
         env_file.write(f"{metric}={value}\n")
        # if metric in url_map:
         #    link = f"{url_map[metric]}"
