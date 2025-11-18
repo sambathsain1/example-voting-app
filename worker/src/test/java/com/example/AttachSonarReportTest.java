@@ -1,7 +1,8 @@
 package com.example;
 
 import io.qameta.allure.Allure;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
+import org.testng.Assert;
 import org.json.JSONObject;
 
 import java.io.InputStream;
@@ -9,20 +10,18 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-class AttachSonarReportTest {
+public class AttachSonarReportTest {
 
     private static final String SONAR_URL = "http://172.30.117.227:9000"; // your SonarQube base URL
     private static final String PROJECT_KEY = "voting-app";              // your SonarQube project key
     private static final String SONAR_TOKEN = System.getenv("SONAR_TOKEN"); // Jenkins will inject this token
 
     @Test
-    void fetchAndAttachSonarQubeReport() throws Exception {
+    public void fetchAndAttachSonarQubeReport() throws Exception {
+
         if (SONAR_TOKEN == null || SONAR_TOKEN.isEmpty()) {
             Allure.step("SONAR_TOKEN not set. Skipping SonarQube check.");
-            assertTrue(true);
+            Assert.assertTrue(true);  // TestNG assert
             return;
         }
 
@@ -38,8 +37,10 @@ class AttachSonarReportTest {
 
         int responseCode = connection.getResponseCode();
         Allure.step("Response code: " + responseCode);
-        assertEquals(200, responseCode, "SonarQube API did not return 200 OK");
-        
+
+        // TestNG assertion
+        Assert.assertEquals(responseCode, 200, "SonarQube API did not return 200 OK");
+
         try (InputStream responseStream = connection.getInputStream()) {
             String response = new String(responseStream.readAllBytes(), StandardCharsets.UTF_8);
             Allure.addAttachment("SonarQube API Response", "application/json", response);
@@ -51,7 +52,8 @@ class AttachSonarReportTest {
             Allure.step("Quality Gate Status: " + status);
             Allure.step("Details: " + projectStatus.toString(2));
 
-            assertTrue(!"ERROR".equalsIgnoreCase(status),
+            // TestNG assertion
+            Assert.assertTrue(!"ERROR".equalsIgnoreCase(status),
                     "SonarQube Quality Gate failed with status: " + status);
         }
     }
