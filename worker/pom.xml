@@ -151,9 +151,15 @@
             <version>3.2.5</version>
             <configuration>
                <useModulePath>false</useModulePath>
-	<suiteXmlFiles>
-            <suiteXmlFile>testng.xml</suiteXmlFile> 
-          </suiteXmlFiles>
+				<includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*Tests.java</include>
+                        <include>**/*TestCase.java</include>
+                    </includes>
+	           <suiteXmlFiles>
+                   <suiteXmlFile>testng.xml</suiteXmlFile> 
+               </suiteXmlFiles>
+			   <testNGArtifactName>org.testng:testng</testNGArtifactName>
             </configuration>
       </plugin>
        <plugin>
