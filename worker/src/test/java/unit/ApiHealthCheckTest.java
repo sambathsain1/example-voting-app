@@ -7,7 +7,7 @@ public class ApiHealthCheckTest {
 
     @Test
     public void checkApiStatus() {
-        int statusCode = 200; // mock
+        int statusCode = 500; // mock
         Assert.assertEquals(statusCode, 200, "API is not healthy");
     }
 }
