@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class HondaApiTestsTest {
+public class HondaApiTests {
 
     // Base URL for the NHTSA vPIC API
     private final String BASE_URL = "https://vpic.nhtsa.dot.gov/api";
