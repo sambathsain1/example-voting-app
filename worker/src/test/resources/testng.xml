@@ -1,14 +1,31 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="AllTests">
+<suite name="AllTestcases">
     <listeners>
       <listener class-name="utils.ExtentReporterNG"/>
     </listeners>
-    <test name="All Test Cases">
+     <test name="Unit Tests">
         <classes>
             <class name="com.example.SampleTest"/>
             <class name="com.example.AttachSonarReportTest"/>
+        </classes>
+    </test>
+
+    <!-- ==========================
+         TEST GROUP 2 — UI Tests
+         ========================== -->
+    <test name="UI Automation Tests">
+        <classes>
             <class name="testcase.AutomationTests"/>
+        </classes>
+    </test>
+
+    <!-- ==========================
+         TEST GROUP 3 — API Tests
+         ========================== -->
+    <test name="API Tests">
+        <classes>
             <class name="testcase.HondaApiTests"/>
         </classes>
     </test>
+    
 </suite>
