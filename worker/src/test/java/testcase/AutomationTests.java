@@ -14,7 +14,7 @@ public class AutomationTests {
     WebDriver driver;
     WebDriverWait wait;
     public static final String BASE_URL = "https://demowebshop.tricentis.com/";
-   // String BASE_URL = "https://demowebshop.tricentis.com/";
+  
 
     @BeforeClass
     public void setup() {
